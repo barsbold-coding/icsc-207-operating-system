@@ -1,0 +1,3 @@
+[submodule "kernel-module"]
+	path = kernel-module
+	url = https://github.com/barsbold-coding/kernel-module.git

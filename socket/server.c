@@ -6,10 +6,12 @@
 
 #define PORT 8080
 #define MAX_BUF 1024
+#define IP_ADDR "192.168.64.4"
 
 int main(void)
 {
-    int socket_desc, client_sock, client_size;
+    int socket_desc, client_sock;
+    socklen_t client_size;
     struct sockaddr_in server_addr, client_addr;
     char server_message[MAX_BUF], client_message[MAX_BUF];
     
@@ -29,7 +31,7 @@ int main(void)
     // Set port and IP:
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(PORT);
-    server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    server_addr.sin_addr.s_addr = inet_addr(IP_ADDR);
     
     // Bind to the set port and IP:
     if(bind(socket_desc, (struct sockaddr*)&server_addr, sizeof(server_addr))<0){
@@ -63,7 +65,7 @@ int main(void)
     printf("Msg from client: %s\n", client_message);
     
     // Respond to client:
-    strcpy(server_message, "This is the server's message.");
+    strcpy(server_message, "This is the server's message.\n");
     
     if (send(client_sock, server_message, strlen(server_message), 0) < 0){
         printf("Can't send\n");

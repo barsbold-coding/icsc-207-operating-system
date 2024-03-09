@@ -6,6 +6,7 @@
 
 #define PORT 8080
 #define MAX_BUF 1024
+#define IP_ADDR "192.168.64.4"
 
 int main(void)
 {
@@ -30,7 +31,7 @@ int main(void)
     // Set port and IP the same as server-side:
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(PORT);
-    server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    server_addr.sin_addr.s_addr = inet_addr(IP_ADDR);
     
     // Send connection request to server:
     if(connect(socket_desc, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0){
